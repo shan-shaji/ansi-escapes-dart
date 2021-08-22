@@ -39,10 +39,10 @@ class AnsiEscapes {
     return returnValue;
   }
 
-  String cursorUp([count = 1]) => ESC + count + 'A';
-  String cursorDown([count = 1]) => ESC + count + 'B';
-  String cursorForward([count = 1]) => ESC + count + 'C';
-  String cursorBackward([count = 1]) => ESC + count + 'D';
+  String cursorUp([count = 1]) => ESC + count.toString() + 'A';
+  String cursorDown([count = 1]) => ESC + count.toString() + 'B';
+  String cursorForward([count = 1]) => ESC + count.toString() + 'C';
+  String cursorBackward([count = 1]) => ESC + count.toString() + 'D';
 
   String cursorLeft = ESC + 'G';
   String cursorGetPosition = ESC + '6n';

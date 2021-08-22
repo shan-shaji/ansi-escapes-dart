@@ -1,30 +1,30 @@
 # ansi-escapes
 
-> [ANSI escape codes](http://www.termsys.demon.co.uk/vtansi.htm) for manipulating the terminal
+> [ANSI escape codes]() for manipulating the terminal
 
 ## Install
 
 ```
-$ npm install ansi-escapes
+$ dart pub add ansi-escapes
 ```
 
 ## Usage
 
-```js
-import ansiEscapes from 'ansi-escapes';
+```dart
+import 'package:ansi_escapes/ansi_escapes.dart';
 
 // Moves the cursor two rows up and to the left
-process.stdout.write(ansiEscapes.cursorUp(2) + ansiEscapes.cursorLeft);
+stdout.write(ansiEscapes.cursorUp(2) + ansiEscapes.cursorLeft);
 //=> '\u001B[2A\u001B[1000D'
 ```
 
 ## API
 
-### cursorTo(x, y?)
+### cursorTo(x, y)
 
 Set the absolute position of the cursor. `x0` `y0` is the top left of the screen.
 
-### cursorMove(x, y?)
+### cursorMove(x, y)
 
 Set the position of the cursor relative to its current position.
 
@@ -130,13 +130,13 @@ Create a clickable link.
 
 [Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) Use [`supports-hyperlinks`](https://github.com/jamestalmage/supports-hyperlinks) to detect link support.
 
-### image(filePath, options?)
+### image(filePath, options)
 
 Display an image.
 
 *Currently only supported on iTerm2 >=3*
 
-See [term-img](https://github.com/sindresorhus/term-img) for a higher-level module.
+See [term-img]() for a higher-level module.
 
 #### input
 
