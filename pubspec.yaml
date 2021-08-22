@@ -1,6 +1,6 @@
 name: ansi_escapes
 description: ANSI escape codes for manipulating the terminal
-version: 0.0.1
+version: 1.0.0-dev.1
 homepage: https://github.com/shan-shaji/ansi-escapes-dart
 
 environment:
