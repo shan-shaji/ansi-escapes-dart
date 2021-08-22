@@ -2,6 +2,10 @@
 
 > [ANSI escape codes]() for manipulating the terminal
 
+This is a feature clone of the awesome [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) (JavaScript) library.
+
+All credits go to [Sindre Sorhus](https://github.com/sindresorhus).
+
 ## Install
 
 ```
