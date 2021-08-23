@@ -9,7 +9,8 @@ All credits go to [Sindre Sorhus](https://github.com/sindresorhus).
 ## Install
 
 ```
-$ dart pub add ansi-escapes
+$ dart pub add ansi_escapes
+
 ```
 
 ## Usage

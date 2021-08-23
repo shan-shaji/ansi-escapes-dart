@@ -1,13 +1,11 @@
 import 'dart:io';
 
+import 'package:ansi_escapes/src/constants/constants.dart';
+import 'package:ansi_escapes/src/helper/options.dart';
 import 'package:ansi_escapes/src/utils/exceptions.dart';
 
-const ESC = '\u001B[';
-const OSC = '\u001B]';
-const BEL = '\u0007';
-const SEP = ';';
-
 class AnsiEscapes {
+  /// Set the absolute position of the cursor. x0 y0 is the top left of the screen.
   String curserTo(x, y) {
     if (x.runtimeType != int) {
       throw TypeException('The `x` argument is required');
@@ -15,9 +13,10 @@ class AnsiEscapes {
     if (y.runtimeType != int) {
       return ESC + (x + 1) + 'G';
     }
-    return ESC + (y + 1) + ';' + (x + 1) + 'H';
+    return ESC + (y + 1).toString() + ';' + (x + 1).toString() + 'H';
   }
 
+  /// Set the position of the cursor relative to its current position.
   String cursorMove(x, y) {
     if (x.runtimeType != int) {
       throw TypeException('The `x` argument is required');
@@ -26,54 +25,94 @@ class AnsiEscapes {
     var returnValue = '';
 
     if (x < 0) {
-      returnValue += ESC + (-x) + 'D';
+      returnValue += ESC + (-x).toString() + 'D';
     } else if (x > 0) {
-      returnValue += ESC + x + 'C';
+      returnValue += ESC + x.toString() + 'C';
     }
 
     if (y < 0) {
-      returnValue += ESC + (-y) + 'A';
+      returnValue += ESC + (-y).toString() + 'A';
     } else if (y > 0) {
-      returnValue += ESC + y + 'B';
+      returnValue += ESC + y.toString() + 'B';
     }
     return returnValue;
   }
 
+  /// Move cursor up a specific amount of rows. Default `count`` value is 1.
   String cursorUp([count = 1]) => ESC + count.toString() + 'A';
+
+  /// Move cursor down a specific amount of rows. Default `count` value is 1.
   String cursorDown([count = 1]) => ESC + count.toString() + 'B';
+
+  /// Move cursor forward a specific amount of columns. Default `count` is 1.
   String cursorForward([count = 1]) => ESC + count.toString() + 'C';
+
+  /// Move cursor backward a specific amount of columns. Default `count` is 1.
   String cursorBackward([count = 1]) => ESC + count.toString() + 'D';
 
+  /// [cursorLeft] Move cursor to the left side.
   String cursorLeft = ESC + 'G';
+
+  /// [cursorGetPosition] Get cursor position.
   String cursorGetPosition = ESC + '6n';
+
+  /// [cursorNextLine] Move cursor to the next line.
   String cursorNextLine = ESC + 'E';
+
+  /// [cursorPrevLine] Move cursor to the previous line.
   String cursorPrevLine = ESC + 'F';
+
+  /// [cursorHide] Hide cursor.
   String cursorHide = ESC + '?25l';
+
+  /// [cursorShow] Show cursor.
   String cursorShow = ESC + '?25h';
 
+  /// [eraseEndLine] Erase from the current
+  /// cursor position to the end of the current line.
   String eraseEndLine = ESC + 'K';
+
+  /// [eraseStartLine] Erase from the current
+  /// cursor position to the start of the current line.
   String eraseStartLine = ESC + '1K';
+
+  /// [eraseLine] E1rase the entire current line.
   String eraseLine = ESC + '2K';
+
+  /// [eraseDown] Erase the screen from the current
+  /// line down to the bottom of the screen.
   String eraseDown = ESC + 'J';
+
+  /// [eraseUp] Erase the screen from the current
+  /// line up to the top of the screen.
   String eraseUp = ESC + '1J';
+
+  /// [eraseScreen] Erase the screen and move the cursor the top left position.
   String eraseScreen = ESC + '2J';
+
+  /// [scrollUp] Scroll display up one line.
   String scrollUp = ESC + 'S';
+
+  /// [scrollDown] Scroll display down one line.
   String scrollDown = ESC + 'T';
 
+  /// [clearScreen] Clear the terminal screen. (Viewport)
   String clearScreen = '\u001Bc';
 
+  /// Erase from the current cursor position up the specified amount of rows `count`.
   String eraseLines(count) {
     var clear = '';
 
     for (var i = 0; i < count; i++) {
       clear += eraseLine + (i < count - 1 ? cursorUp() : '');
     }
-    if (count) {
+    if (count != null) {
       clear += cursorLeft;
     }
     return clear;
   }
 
+  /// Clear the whole terminal, including scrollback buffer. (Not just the visible part of it)
   String get clearTerminal => Platform.isWindows
       ? '$eraseScreen${ESC}0f'
       :
@@ -83,8 +122,10 @@ class AnsiEscapes {
       // More info: https://www.real-world-systems.com/docs/ANSIcode.html
       '$eraseScreen${ESC}3J${ESC}H';
 
+  /// [beep] Output a beeping sound.
   String beep = BEL;
 
+  /// [link] Create a clickable link.
   String link(url, text) {
     return [
       OSC,
@@ -119,16 +160,4 @@ class AnsiEscapes {
 
     return returnValue + ':' + buffer.toString('base64') + BEL;
   }
-}
-
-class Options {
-  int? width;
-  int? height;
-  bool? preserveAspectRatio;
-
-  Options({
-    this.height,
-    this.preserveAspectRatio,
-    this.width,
-  });
 }
