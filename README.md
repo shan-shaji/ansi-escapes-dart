@@ -133,7 +133,7 @@ Output a beeping sound.
 
 Create a clickable link.
 
-[Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) Use [`supports-hyperlinks`](https://github.com/jamestalmage/supports-hyperlinks) to detect link support.
+[Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) 
 
 ### image(filePath, options)
 

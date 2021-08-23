@@ -126,6 +126,7 @@ class AnsiEscapes {
   String beep = BEL;
 
   /// [link] Create a clickable link.
+  /// Only supported in selected terminals
   String link(url, text) {
     return [
       OSC,
