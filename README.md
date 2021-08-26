@@ -133,39 +133,5 @@ Output a beeping sound.
 
 Create a clickable link.
 
-[Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) Use [`supports-hyperlinks`](https://github.com/jamestalmage/supports-hyperlinks) to detect link support.
+[Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) 
 
-### image(filePath, options)
-
-Display an image.
-
-*Currently only supported on iTerm2 >=3*
-
-See [term-img]() for a higher-level module.
-
-#### input
-
-Type: `Buffer`
-
-Buffer of an image. Usually read in with `fs.readFile()`.
-
-#### options
-
-Type: `object`
-
-##### width
-##### height
-
-Type: `string | number`
-
-The width and height are given as a number followed by a unit, or the word "auto".
-
-- `N`: N character cells.
-- `Npx`: N pixels.
-- `N%`: N percent of the session's width or height.
-- `auto`: The image's inherent size will be used to determine an appropriate dimension.
-
-##### preserveAspectRatio
-
-Type: `boolean`\
-Default: `true`
