@@ -133,5 +133,5 @@ Create a clickable link.
 [Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) 
 
 
-Inspired from [Sindre Sorhus](https://github.com/sindresorhus) of  [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) package .
+Inspired from [Sindre Sorhus](https://github.com/sindresorhus)  [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) package .
 
