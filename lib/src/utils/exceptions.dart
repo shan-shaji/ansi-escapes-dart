@@ -9,6 +9,8 @@ class AnsiException implements Exception {
 }
 
 class TypeException extends AnsiException {
+  @override
   String? msg;
+
   TypeException([msg]) : super(msg);
 }

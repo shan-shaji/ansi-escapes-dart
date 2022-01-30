@@ -16,13 +16,6 @@
             </list>
           </value>
         </entry>
-        <entry key="ansi_escapes">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../../ansi-escapes-dart/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="args">
           <value>
             <list>
@@ -396,7 +389,6 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/web_socket_channel-2.1.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/webkit_inspection_protocol-1.0.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/yaml-3.1.0/lib" />
-      <root url="file://$PROJECT_DIR$/../../ansi-escapes-dart/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

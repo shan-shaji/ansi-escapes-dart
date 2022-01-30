@@ -2,10 +2,6 @@
 
 > [ANSI escape codes]() for manipulating the terminal
 
-This is a feature clone of the awesome [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) (JavaScript) library.
-
-All credits go to [Sindre Sorhus](https://github.com/sindresorhus).
-
 ## Install
 
 ```
@@ -21,6 +17,7 @@ import 'package:ansi_escapes/ansi_escapes.dart';
 // Moves the cursor two rows up and to the left
 stdout.write(ansiEscapes.cursorUp(2) + ansiEscapes.cursorLeft);
 //=> '\u001B[2A\u001B[1000D'
+
 ```
 
 ## API
@@ -134,4 +131,7 @@ Output a beeping sound.
 Create a clickable link.
 
 [Supported terminals.](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) 
+
+
+Inspired from [Sindre Sorhus](https://github.com/sindresorhus) of  [ansi-escapes](https://www.npmjs.com/package/ansi-escapes) package .
 
