@@ -7,7 +7,7 @@ import 'package:ansi_escapes/src/utils/exceptions.dart';
 
 class AnsiEscapes {
   /// Set the absolute position of the cursor. x0 y0 is the top left of the screen.
-  String curserTo(x, y) {
+  String cursorTo(x, y) {
     if (x.runtimeType != int) {
       throw TypeException('The `x` argument is required');
     }
