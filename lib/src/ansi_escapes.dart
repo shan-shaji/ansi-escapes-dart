@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data' show Uint8List;
 
 import 'package:ansi_escapes/src/constants/constants.dart';
-import 'package:ansi_escapes/src/helper/options.dart';
 import 'package:ansi_escapes/src/utils/exceptions.dart';
 
 class AnsiEscapes {
@@ -10,18 +11,15 @@ class AnsiEscapes {
   static AnsiEscapes instance = AnsiEscapes._();
 
   /// Set the absolute position of the cursor. x0 y0 is the top left of the screen.
-  String cursorTo(x, y) {
-    if (x.runtimeType != int) {
-      throw TypeException('The `x` argument is required');
+  String cursorTo(int x, [int? y]) {
+    if (y == null) {
+      return '$esc${x + 1}G';
     }
-    if (y.runtimeType != int) {
-      return ESC + (x + 1) + 'G';
-    }
-    return ESC + (y + 1).toString() + ';' + (x + 1).toString() + 'H';
+    return '$esc${y + 1};${x + 1}H';
   }
 
   /// Set the position of the cursor relative to its current position.
-  String cursorMove(x, y) {
+  String cursorMove(int x, int y) {
     if (x.runtimeType != int) {
       throw TypeException('The `x` argument is required');
     }
@@ -29,140 +27,144 @@ class AnsiEscapes {
     var returnValue = '';
 
     if (x < 0) {
-      returnValue += ESC + (-x).toString() + 'D';
+      returnValue += '$esc${-x}D';
     } else if (x > 0) {
-      returnValue += ESC + x.toString() + 'C';
+      returnValue += '$esc${x}C';
     }
 
     if (y < 0) {
-      returnValue += ESC + (-y).toString() + 'A';
+      returnValue += '$esc${-y}A';
     } else if (y > 0) {
-      returnValue += ESC + y.toString() + 'B';
+      returnValue += '$esc${y}B';
     }
     return returnValue;
   }
 
   /// Move cursor up a specific amount of rows. Default `count`` value is 1.
-  String cursorUp([count = 1]) => ESC + count.toString() + 'A';
+  String cursorUp([int count = 1]) => '$esc${count}A';
 
   /// Move cursor down a specific amount of rows. Default `count` value is 1.
-  String cursorDown([count = 1]) => ESC + count.toString() + 'B';
+  String cursorDown([int count = 1]) => '$esc${count}B';
 
   /// Move cursor forward a specific amount of columns. Default `count` is 1.
-  String cursorForward([count = 1]) => ESC + count.toString() + 'C';
+  String cursorForward([int count = 1]) => '$esc${count}C';
 
   /// Move cursor backward a specific amount of columns. Default `count` is 1.
-  String cursorBackward([count = 1]) => ESC + count.toString() + 'D';
+  String cursorBackward([int count = 1]) => '$esc${count}D';
 
   /// [cursorLeft] Move cursor to the left side.
-  String cursorLeft = ESC + 'G';
+  String cursorLeft = '${esc}G';
 
   /// [cursorGetPosition] Get cursor position.
-  String cursorGetPosition = ESC + '6n';
+  String cursorGetPosition = '${esc}6n';
 
   /// [cursorNextLine] Move cursor to the next line.
-  String cursorNextLine = ESC + 'E';
+  String cursorNextLine = '${esc}E';
 
   /// [cursorPrevLine] Move cursor to the previous line.
-  String cursorPrevLine = ESC + 'F';
+  String cursorPrevLine = '${esc}F';
 
   /// [cursorHide] Hide cursor.
-  String cursorHide = ESC + '?25l';
+  String cursorHide = '$esc?25l';
 
   /// [cursorShow] Show cursor.
-  String cursorShow = ESC + '?25h';
+  String cursorShow = '$esc?25h';
 
   /// [eraseEndLine] Erase from the current
   /// cursor position to the end of the current line.
-  String eraseEndLine = ESC + 'K';
+  String eraseEndLine = '${esc}K';
 
   /// [eraseStartLine] Erase from the current
   /// cursor position to the start of the current line.
-  String eraseStartLine = ESC + '1K';
+  String eraseStartLine = '${esc}1K';
 
   /// [eraseLine] E1rase the entire current line.
-  String eraseLine = ESC + '2K';
+  String eraseLine = '${esc}2K';
 
   /// [eraseDown] Erase the screen from the current
   /// line down to the bottom of the screen.
-  String eraseDown = ESC + 'J';
+  String eraseDown = '${esc}J';
 
   /// [eraseUp] Erase the screen from the current
   /// line up to the top of the screen.
-  String eraseUp = ESC + '1J';
+  String eraseUp = '${esc}1J';
 
   /// [eraseScreen] Erase the screen and move the cursor the top left position.
-  String eraseScreen = ESC + '2J';
+  String eraseScreen = '${esc}2J';
 
   /// [scrollUp] Scroll display up one line.
-  String scrollUp = ESC + 'S';
+  String scrollUp = '${esc}S';
 
   /// [scrollDown] Scroll display down one line.
-  String scrollDown = ESC + 'T';
+  String scrollDown = '${esc}T';
 
   /// [clearScreen] Clear the terminal screen. (Viewport)
   String clearScreen = '\u001Bc';
 
   /// Erase from the current cursor position up the specified amount of rows `count`.
-  String eraseLines(count) {
+  String eraseLines(int count) {
     var clear = '';
 
     for (var i = 0; i < count; i++) {
       clear += eraseLine + (i < count - 1 ? cursorUp() : '');
     }
-    if (count != null) {
-      clear += cursorLeft;
-    }
+
+    clear += cursorLeft;
     return clear;
   }
 
-  /// Clear the whole terminal, including scrollback buffer. (Not just the visible part of it)
+  /// Clear the whole terminal, including scroll back buffer. (Not just the visible part of it)
   String get clearTerminal => Platform.isWindows
-      ? '$eraseScreen${ESC}0f'
+      ? '$eraseScreen${esc}0f'
       :
       // 1. Erases the screen (Only done in case `2` is not supported)
-      // 2. Erases the whole screen including scrollback buffer
+      // 2. Erases the whole screen including scroll back buffer
       // 3. Moves cursor to the top-left position
       // More info: https://www.real-world-systems.com/docs/ANSIcode.html
-      '$eraseScreen${ESC}3J${ESC}H';
+      '$eraseScreen${esc}3J${esc}H';
 
   /// [beep] Output a beeping sound.
-  String beep = BEL;
+  String beep = bel;
 
   /// [link] Create a clickable link.
   /// Only supported in selected terminals
-  String link(url, text) {
+  String link(String url, String text) {
     return [
-      OSC,
+      osc,
       '8',
-      SEP,
-      SEP,
+      sep,
+      sep,
       url,
-      BEL,
+      bel,
       text,
-      OSC,
+      osc,
       '8',
-      SEP,
-      SEP,
-      BEL,
+      sep,
+      sep,
+      bel,
     ].join('');
   }
 
-  String image(buffer, Options options) {
-    var returnValue = '${OSC}1337;File=inline=1';
+  String image(
+    Uint8List buffer, {
+    int? width,
+    int? height,
+    bool? preserveAspectRatio,
+  }) {
+    var returnValue = '${osc}1337;File=inline=1';
 
-    if (options.width != null) {
-      returnValue += ';width=${options.width}';
+    if (width != null) {
+      returnValue += ';width=$width';
     }
 
-    if (options.height != null) {
-      returnValue += ';height=${options.height}';
+    if (height != null) {
+      returnValue += ';height=$height';
     }
 
-    if (options.preserveAspectRatio == false) {
+    if (preserveAspectRatio == false) {
       returnValue += ';preserveAspectRatio=0';
     }
 
-    return returnValue + ':' + buffer.toString('base64') + BEL;
+    return '$returnValue:${base64Encode(buffer)}$bel';
   }
 }

@@ -1,6 +1,7 @@
 class AnsiException implements Exception {
   String? msg;
-  AnsiException([msg]);
+
+  AnsiException(this.msg);
 
   @override
   String toString() {
@@ -9,8 +10,5 @@ class AnsiException implements Exception {
 }
 
 class TypeException extends AnsiException {
-  @override
-  String? msg;
-
-  TypeException([msg]) : super(msg);
+  TypeException(String? msg) : super(msg);
 }
