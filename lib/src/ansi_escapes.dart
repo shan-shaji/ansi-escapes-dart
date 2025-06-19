@@ -5,6 +5,10 @@ import 'package:ansi_escapes/src/helper/options.dart';
 import 'package:ansi_escapes/src/utils/exceptions.dart';
 
 class AnsiEscapes {
+  AnsiEscapes._();
+
+  static AnsiEscapes instance = AnsiEscapes._();
+
   /// Set the absolute position of the cursor. x0 y0 is the top left of the screen.
   String cursorTo(x, y) {
     if (x.runtimeType != int) {
