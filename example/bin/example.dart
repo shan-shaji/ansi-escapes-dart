@@ -6,7 +6,7 @@ void main() async {
   stdout.write(ansiEscapes.clearScreen);
 
   // Move cursor to line 5, column 10
-  stdout.write(ansiEscapes.cursorTo(10, 5));
+  stdout.write(ansiEscapes.cursorTo(0, 5));
 
   // Print some text at the new location
   print('Hello from ansi_escapes!');
@@ -24,6 +24,16 @@ void main() async {
     stdout.write(ansiEscapes.cursorShow);
   });
 
+  // Link Example
+  stdout.write(
+    "Find me ${ansiEscapes.link('https://pub.dev/packages/ansi_escapes', "here")}",
+  );
+
+  stdout.write(ansiEscapes.cursorNextLine);
+
+  // Image Example
   final bytesFile = await File('assets/hello_terminal.png').readAsBytes();
   stdout.write(ansiEscapes.image(bytesFile));
+
+  stdout.write(ansiEscapes.cursorNextLine);
 }
