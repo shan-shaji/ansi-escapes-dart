@@ -5,7 +5,8 @@ repository: https://github.com/shan-shaji/ansi-escapes-dart
 issue_tracker: https://github.com/shan-shaji/ansi-escapes-dart/issues/new
 screenshots:
   - description: 'This screenshot demonstrates a simple example of how to use the package.'
-  - path: ansi-escapes-example.png
+    path: ansi-escapes-example.png
+
 topics:
   - terminal
   - ansi
