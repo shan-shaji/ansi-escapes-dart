@@ -145,8 +145,9 @@ class AnsiEscapes {
     ].join('');
   }
 
+  /// Display an image.
   String image(
-    Uint8List buffer, {
+    Uint8List filePathInBytes, {
     int? width,
     int? height,
     bool? preserveAspectRatio,
@@ -165,6 +166,6 @@ class AnsiEscapes {
       returnValue += ';preserveAspectRatio=0';
     }
 
-    return '$returnValue:${base64Encode(buffer)}$bel';
+    return '$returnValue:${base64Encode(filePathInBytes)}$bel';
   }
 }

@@ -1,3 +1,15 @@
+# 2.0.0
+### ⚠️ Breaking 
+- Added explicit types to public APIs
+- Replaced the `Options` class with named optional parameters in the `image()` API.
+- This release may break existing code due to stricter typing and API changes
+
+### Improvements
+- Fixed Dart analysis issues
+- Internal refactor to a **singleton pattern** for the `AnsiEscapes` instance.
+- Added more usage examples
+
+
 # 1.1.0
 - [Breaking] change curserTo --> cursorTo
 
