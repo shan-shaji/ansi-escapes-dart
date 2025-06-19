@@ -8,6 +8,14 @@ packages:
       relative: true
     source: path
     version: "1.1.0"
+  lints:
+    dependency: "direct dev"
+    description:
+      name: lints
+      sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   path:
     dependency: "direct main"
     description:
@@ -16,13 +24,5 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
-  pedantic:
-    dependency: "direct dev"
-    description:
-      name: pedantic
-      sha256: "67fc27ed9639506c856c840ccce7594d0bdcd91bc8d53d6e52359449a1d50602"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.11.1"
 sdks:
-  dart: ">=2.12.0 <4.0.0"
+  dart: ">=3.8.0-0 <4.0.0"
