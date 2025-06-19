@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:ansi_escapes/ansi_escapes.dart';
 
-void main() {
+void main() async {
   // Clear the screen
   stdout.write(ansiEscapes.clearScreen);
 
@@ -23,4 +23,7 @@ void main() {
   Future.delayed(Duration(seconds: 4), () {
     stdout.write(ansiEscapes.cursorShow);
   });
+
+  final bytesFile = await File('assets/hello_terminal.png').readAsBytes();
+  stdout.write(ansiEscapes.image(bytesFile));
 }

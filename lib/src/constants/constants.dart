@@ -1,4 +1,4 @@
-const ESC = '\u001B[';
-const OSC = '\u001B]';
-const BEL = '\u0007';
-const SEP = ';';
+const esc = '\u001B['; // Escape sequence introducer
+const osc = '\u001B]'; // Operating system command introducer
+const bel = '\u0007';  // Bell character (alert)
+const sep = ';';       // Separator for parameters
