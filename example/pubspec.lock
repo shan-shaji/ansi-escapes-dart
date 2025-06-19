@@ -7,20 +7,22 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0-dev.2"
+    version: "1.1.0"
   path:
     dependency: "direct main"
     description:
       name: path
-      url: "https://pub.dartlang.org"
+      sha256: "2ad4cddff7f5cc0e2d13069f2a3f7a73ca18f66abd6f5ecf215219cdb3638edb"
+      url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
   pedantic:
     dependency: "direct dev"
     description:
       name: pedantic
-      url: "https://pub.dartlang.org"
+      sha256: "67fc27ed9639506c856c840ccce7594d0bdcd91bc8d53d6e52359449a1d50602"
+      url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
+  dart: ">=2.12.0 <4.0.0"
