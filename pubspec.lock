@@ -146,7 +146,7 @@ packages:
     source: hosted
     version: "0.6.3"
   lints:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: lints
       sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0

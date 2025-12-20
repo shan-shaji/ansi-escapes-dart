@@ -1,3 +1,6 @@
+# 2.0.1
+- fix: move `lints` dependency under dev_dependencies.
+
 # 2.0.0
 ### ⚠️ Breaking 
 - Added explicit types to public APIs
