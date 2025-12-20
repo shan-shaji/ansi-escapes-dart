@@ -21,7 +21,7 @@ dev_dependencies:
   test: ^1.16.0
 
 dependencies:
-  lints: ^6.0.0
+  lints: ">=2.0.0"
 
 
 
