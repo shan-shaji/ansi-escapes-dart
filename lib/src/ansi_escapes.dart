@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:ansi_escapes/src/constants/constants.dart';
-import 'package:ansi_escapes/src/utils/exceptions.dart';
 
 class AnsiEscapes {
   AnsiEscapes._();
