@@ -73,7 +73,7 @@ class AnsiEscapes {
   /// cursor position to the start of the current line.
   String eraseStartLine = '${esc}1K';
 
-  /// [eraseLine] E1rase the entire current line.
+  /// [eraseLine] Erase the entire current line.
   String eraseLine = '${esc}2K';
 
   /// [eraseDown] Erase the screen from the current
@@ -100,7 +100,7 @@ class AnsiEscapes {
   String eraseLines(int count) {
     var clear = '';
 
-    for (var i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
       clear += eraseLine + (i < count - 1 ? cursorUp() : '');
     }
 
