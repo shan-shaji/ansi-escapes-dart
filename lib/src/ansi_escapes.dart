@@ -20,10 +20,6 @@ class AnsiEscapes {
 
   /// Set the position of the cursor relative to its current position.
   String cursorMove(int x, int y) {
-    if (x.runtimeType != int) {
-      throw TypeException('The `x` argument is required');
-    }
-
     var returnValue = '';
 
     if (x < 0) {
